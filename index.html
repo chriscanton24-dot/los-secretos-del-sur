@@ -85,13 +85,15 @@
       position: relative;
       overflow: hidden;
     }
-    /* All content sits above decorative layer */
-    .geo-section > * { position: relative; z-index: 2; }
-    /* Inner diamond divs are decorative — behind content, no layout impact */
-    .geo-section > .geo-inner {
+    /* All direct children sit above decorative layer EXCEPT geo-inner */
+    .geo-section > *:not(.geo-inner) { position: relative; z-index: 2; }
+    /* geo-inner divs are purely decorative — forced absolute, behind everything */
+    .geo-inner {
       position: absolute !important;
-      z-index: 1 !important;
-      pointer-events: none;
+      z-index: 0 !important;
+      pointer-events: none !important;
+      border-radius: 0;
+      transform: rotate(45deg);
     }
 
     /* Diamond panel pseudo-elements — absolutely positioned, no layout impact */
@@ -130,14 +132,7 @@
     .hero.geo-section::before,
     .hero.geo-section::after { display: none; }
 
-    /* Inner nested diamonds */
-    .geo-inner {
-      position: absolute;
-      border-radius: 0;
-      transform: rotate(45deg);
-      pointer-events: none;
-      z-index: 1;
-    }
+    /* Inner nested diamond sizes and positions */
     .geo-inner.gi-tr {
       width: 200px; height: 200px;
       top: -70px; right: -70px;
@@ -158,17 +153,6 @@
       border-color: rgba(10,10,10,0.22) !important;
       background: rgba(10,10,10,0.05) !important;
       box-shadow: none !important;
-    }
-
-      z-index: 1;
-      background-image: repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 3px,
-        rgba(201,168,76,0.018) 3px,
-        rgba(201,168,76,0.018) 4px
-      );
-      opacity: 0.8;
     }
 
 
