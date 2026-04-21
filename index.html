@@ -80,15 +80,21 @@
       background: linear-gradient(160deg, #3e3e3e 0%, #3A3A3A 60%, #2e2e2e 100%);
     }
 
-    /* Section corner diamonds using ::before / ::after */
+    /* geo-section: relative + hidden overflow so diamonds stay inside */
     .geo-section {
       position: relative;
       overflow: hidden;
     }
+    /* All content sits above decorative layer */
     .geo-section > * { position: relative; z-index: 2; }
-    .geo-section > .geo-inner { z-index: 1; position: absolute; }
+    /* Inner diamond divs are decorative — behind content, no layout impact */
+    .geo-section > .geo-inner {
+      position: absolute !important;
+      z-index: 1 !important;
+      pointer-events: none;
+    }
 
-    /* Diamond panel — large raised shape like Image 3 */
+    /* Diamond panel pseudo-elements — absolutely positioned, no layout impact */
     .geo-section::before,
     .geo-section::after {
       content: '';
@@ -98,46 +104,33 @@
       pointer-events: none;
       z-index: 1;
     }
-
-    /* Top-right diamond — each section gets one */
+    /* Top-right corner diamond */
     .geo-section::before {
-      width: 400px;
-      height: 400px;
-      top: -160px;
-      right: -160px;
+      width: 340px; height: 340px;
+      top: -140px; right: -140px;
       border: 1.5px solid rgba(201,168,76,0.22);
       background: rgba(201,168,76,0.03);
-      box-shadow:
-        inset 0 0 40px rgba(201,168,76,0.06),
-        0 0 40px rgba(201,168,76,0.04);
+      box-shadow: inset 0 0 40px rgba(201,168,76,0.06), 0 0 30px rgba(201,168,76,0.04);
     }
-
-    /* Bottom-left diamond */
+    /* Bottom-left corner diamond */
     .geo-section::after {
-      width: 300px;
-      height: 300px;
-      bottom: -120px;
-      left: -120px;
+      width: 260px; height: 260px;
+      bottom: -110px; left: -110px;
       border: 1px solid rgba(201,168,76,0.16);
       background: rgba(201,168,76,0.025);
-      box-shadow:
-        inset 0 0 30px rgba(201,168,76,0.05),
-        0 0 30px rgba(201,168,76,0.03);
     }
-
-    /* Amber section uses dark diamonds */
+    /* Amber section — dark diamonds */
     #whyus.geo-section::before {
-      border-color: rgba(10,10,10,0.25);
-      background: rgba(10,10,10,0.08);
-      box-shadow: inset 0 0 40px rgba(10,10,10,0.1), 0 0 40px rgba(10,10,10,0.06);
+      border-color: rgba(10,10,10,0.25); background: rgba(10,10,10,0.08); box-shadow: none;
     }
     #whyus.geo-section::after {
-      border-color: rgba(10,10,10,0.18);
-      background: rgba(10,10,10,0.06);
-      box-shadow: none;
+      border-color: rgba(10,10,10,0.18); background: rgba(10,10,10,0.05); box-shadow: none;
     }
+    /* Hero has SVG beams — no pseudo diamonds needed */
+    .hero.geo-section::before,
+    .hero.geo-section::after { display: none; }
 
-    /* Inner nested diamond — second layer of depth */
+    /* Inner nested diamonds */
     .geo-inner {
       position: absolute;
       border-radius: 0;
@@ -146,38 +139,27 @@
       z-index: 1;
     }
     .geo-inner.gi-tr {
-      width: 220px; height: 220px;
+      width: 200px; height: 200px;
       top: -70px; right: -70px;
-      border: 1px solid rgba(201,168,76,0.30);
-      background: rgba(201,168,76,0.02);
+      border: 1px solid rgba(201,168,76,0.28);
     }
     .geo-inner.gi-bl {
-      width: 140px; height: 140px;
+      width: 120px; height: 120px;
       bottom: -40px; left: -40px;
-      border: 1px solid rgba(201,168,76,0.20);
+      border: 1px solid rgba(201,168,76,0.18);
     }
     .geo-inner.gi-accent {
-      width: 80px; height: 80px;
-      border: 1.5px solid rgba(201,168,76,0.50);
-      background: rgba(201,168,76,0.05);
-      box-shadow: 0 0 16px rgba(201,168,76,0.18), inset 0 0 12px rgba(201,168,76,0.08);
+      width: 70px; height: 70px;
+      border: 1.5px solid rgba(201,168,76,0.48);
+      background: rgba(201,168,76,0.045);
+      box-shadow: 0 0 14px rgba(201,168,76,0.16), inset 0 0 10px rgba(201,168,76,0.07);
     }
     #whyus .geo-inner {
-      border-color: rgba(10,10,10,0.25) !important;
-      background: rgba(10,10,10,0.06) !important;
+      border-color: rgba(10,10,10,0.22) !important;
+      background: rgba(10,10,10,0.05) !important;
       box-shadow: none !important;
     }
 
-    /* Vertical line texture on dark sections — like Image 3 */
-    .geo-section::before {
-      /* texture added via additional pseudo — handled via JS-injected div for sections */
-    }
-
-    /* Texture overlay div */
-    .geo-texture-overlay {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
       z-index: 1;
       background-image: repeating-linear-gradient(
         90deg,
@@ -565,8 +547,19 @@
 
     .hero::before { display: none; }
 
-    .hero > * { position: relative; z-index: 2; }
-    .hero .hero-beams { z-index: 1; }
+    /* Hero beams — absolutely positioned, takes NO layout space */
+    .hero-beams {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      display: block !important;
+    }
+
+    /* All hero content sits above beams */
+    .hero > *:not(.hero-beams) { position: relative; z-index: 3; }
 
     .hero-tagline { margin-top: 20px; }
 
