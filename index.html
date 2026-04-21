@@ -48,6 +48,53 @@
     }
 
     /* =============================================
+       GEOMETRIC GOLD DESIGN SYSTEM
+       ============================================= */
+    .geo-layer {
+      position: absolute; inset: 0; overflow: hidden;
+      pointer-events: none; z-index: 0;
+    }
+    .geo-parent { position: relative; }
+    .geo-parent > *:not(.geo-layer) { position: relative; z-index: 1; }
+
+    .geo-diamond {
+      position: absolute;
+      border: 1px solid rgba(201,168,76,0.18);
+      transform: rotate(45deg);
+      border-radius: 0;
+    }
+    .geo-diamond.gd-filled  { background: rgba(201,168,76,0.045); }
+    .geo-diamond.gd-bright  { border-color: rgba(201,168,76,0.42); border-width: 1.5px; }
+    .geo-diamond.gd-mid     { border-color: rgba(201,168,76,0.28); }
+    .geo-diamond.gd-dark    { border-color: rgba(10,10,10,0.20); background: rgba(10,10,10,0.07); }
+    .geo-diamond.gd-dark-bright { border-color: rgba(10,10,10,0.35); border-width: 1.5px; }
+
+    .geo-beam {
+      position: absolute;
+      height: 1.5px;
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(201,168,76,0.55) 30%,
+        rgba(255,220,100,0.95) 50%,
+        rgba(201,168,76,0.55) 70%, transparent 100%);
+      transform-origin: left center;
+      box-shadow: 0 0 8px rgba(201,168,76,0.45), 0 0 20px rgba(201,168,76,0.2);
+    }
+    .geo-texture {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(201,168,76,0.014) 3px, rgba(201,168,76,0.014) 4px
+      );
+    }
+    #whyus .geo-beam {
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(10,10,10,0.3) 30%,
+        rgba(10,10,10,0.55) 50%,
+        rgba(10,10,10,0.3) 70%, transparent 100%);
+      box-shadow: none;
+    }
+
+    /* =============================================
        RESET & BASE
        ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1161,7 +1208,24 @@
   <!-- =============================================
        HERO
        ============================================= -->
-  <section class="hero" id="home">
+  <section class="hero geo-parent" id="home">
+    <!-- HERO GEOMETRY -->
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <!-- Top-right diamond cluster -->
+      <div class="geo-diamond gd-filled"  style="width:420px;height:420px;top:-140px;right:-140px;"></div>
+      <div class="geo-diamond gd-mid"     style="width:260px;height:260px;top:-50px;right:-50px;"></div>
+      <div class="geo-diamond gd-bright"  style="width:120px;height:120px;top:60px;right:80px;"></div>
+      <div class="geo-diamond gd-filled"  style="width:60px;height:60px;top:130px;right:180px;"></div>
+      <!-- Bottom-left diamond cluster -->
+      <div class="geo-diamond gd-filled"  style="width:360px;height:360px;bottom:-140px;left:-120px;"></div>
+      <div class="geo-diamond gd-mid"     style="width:200px;height:200px;bottom:-50px;left:-20px;"></div>
+      <div class="geo-diamond gd-bright"  style="width:80px;height:80px;bottom:80px;left:80px;"></div>
+      <!-- Diagonal gold beams -->
+      <div class="geo-beam" style="width:55%;left:5%;top:38%;transform:rotate(-12deg);"></div>
+      <div class="geo-beam" style="width:40%;left:25%;top:62%;transform:rotate(-8deg);opacity:0.55;"></div>
+      <div class="geo-beam" style="width:30%;right:5%;top:28%;transform:rotate(15deg);opacity:0.45;"></div>
+    </div>
     <!-- Logo hero -->
     <img src="logo.jpg"
          alt="Secretos Del Sur — El Manjar de los Vivos — Catering Amarillo TX"
@@ -1177,7 +1241,16 @@
   <!-- =============================================
        ABOUT
        ============================================= -->
-  <section id="about">
+  <section id="about" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <div class="geo-diamond gd-filled" style="width:380px;height:380px;top:-120px;right:-120px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:220px;height:220px;top:-30px;right:-10px;"></div>
+      <div class="geo-diamond gd-bright" style="width:90px;height:90px;top:80px;right:110px;"></div>
+      <div class="geo-diamond gd-filled" style="width:50px;height:50px;top:160px;right:220px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:160px;height:160px;bottom:-60px;left:-50px;"></div>
+      <div class="geo-beam" style="width:40%;right:0;top:55%;transform:rotate(-6deg);opacity:0.4;"></div>
+    </div>
     <div class="about-grid">
       <div class="about-text">
         <span class="section-label" data-i18n="about.label">Our Story</span>
@@ -1205,7 +1278,17 @@
   <!-- =============================================
        SERVICES
        ============================================= -->
-  <section id="services">
+  <section id="services" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <div class="geo-diamond gd-filled" style="width:300px;height:300px;top:-100px;left:-100px;"></div>
+      <div class="geo-diamond gd-bright" style="width:130px;height:130px;top:20px;left:40px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:70px;height:70px;top:110px;left:160px;"></div>
+      <div class="geo-diamond gd-filled" style="width:240px;height:240px;bottom:-80px;right:-80px;"></div>
+      <div class="geo-diamond gd-bright" style="width:100px;height:100px;bottom:20px;right:40px;"></div>
+      <div class="geo-beam" style="width:50%;left:0;top:45%;transform:rotate(8deg);opacity:0.35;"></div>
+      <div class="geo-beam" style="width:35%;right:5%;bottom:30%;transform:rotate(-10deg);opacity:0.3;"></div>
+    </div>
     <div class="services-header">
       <span class="section-label" data-i18n="services.label">What We Do</span>
       <h2 data-i18n="services.headline">Catering for Every Occasion</h2>
@@ -1239,7 +1322,15 @@
   <!-- =============================================
        MENU
        ============================================= -->
-  <section id="menu">
+  <section id="menu" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <div class="geo-diamond gd-filled" style="width:280px;height:280px;top:-90px;right:-90px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:150px;height:150px;top:-10px;right:20px;"></div>
+      <div class="geo-diamond gd-filled" style="width:260px;height:260px;bottom:-80px;left:-80px;"></div>
+      <div class="geo-diamond gd-bright" style="width:80px;height:80px;bottom:40px;left:60px;"></div>
+      <div class="geo-beam" style="width:45%;right:0;top:35%;transform:rotate(-5deg);opacity:0.3;"></div>
+    </div>
     <div class="menu-header">
       <span class="section-label" data-i18n="menu.label">What's on the Table</span>
       <h2 data-i18n="menu.headline">Curated Menus for Every Event</h2>
@@ -1302,7 +1393,16 @@
   <!-- =============================================
        WHY US — AMBER SECTION
        ============================================= -->
-  <section id="whyus">
+  <section id="whyus" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-diamond gd-dark"        style="width:350px;height:350px;top:-120px;right:-100px;"></div>
+      <div class="geo-diamond gd-dark-bright" style="width:180px;height:180px;top:-20px;right:20px;"></div>
+      <div class="geo-diamond gd-dark"        style="width:80px;height:80px;top:80px;right:140px;"></div>
+      <div class="geo-diamond gd-dark"        style="width:280px;height:280px;bottom:-100px;left:-80px;"></div>
+      <div class="geo-diamond gd-dark-bright" style="width:120px;height:120px;bottom:10px;left:40px;"></div>
+      <div class="geo-beam" style="width:50%;left:10%;top:40%;transform:rotate(-8deg);"></div>
+      <div class="geo-beam" style="width:35%;right:5%;bottom:35%;transform:rotate(10deg);opacity:0.5;"></div>
+    </div>
     <div class="whyus-header">
       <span class="section-label" data-i18n="whyus.label">Why Secretos Del Sur</span>
       <h2 data-i18n="whyus.headline">More Than Catering</h2>
@@ -1330,7 +1430,14 @@
   <!-- =============================================
        GALLERY
        ============================================= -->
-  <section id="gallery">
+  <section id="gallery" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <div class="geo-diamond gd-filled" style="width:220px;height:220px;top:-70px;left:-70px;"></div>
+      <div class="geo-diamond gd-bright" style="width:80px;height:80px;top:20px;left:60px;"></div>
+      <div class="geo-diamond gd-filled" style="width:200px;height:200px;bottom:-60px;right:-60px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:90px;height:90px;bottom:20px;right:60px;"></div>
+    </div>
     <div class="gallery-header">
       <span class="section-label" data-i18n="gallery.label">The Experience</span>
       <h2 data-i18n="gallery.headline">A Feast for the Eyes</h2>
@@ -1350,7 +1457,13 @@
   <!-- =============================================
        TESTIMONIALS
        ============================================= -->
-  <section id="testimonials">
+  <section id="testimonials" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <div class="geo-diamond gd-filled" style="width:260px;height:260px;top:-80px;right:-80px;"></div>
+      <div class="geo-diamond gd-bright" style="width:100px;height:100px;top:30px;right:60px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:180px;height:180px;bottom:-60px;left:-50px;"></div>
+    </div>
     <div class="testimonials-header">
       <span class="section-label" data-i18n="testimonials.label">What Clients Say</span>
       <h2 data-i18n="testimonials.headline">Unforgettable Moments</h2>
@@ -1365,7 +1478,16 @@
   <!-- =============================================
        CONTACT
        ============================================= -->
-  <section id="contact">
+  <section id="contact" class="geo-parent">
+    <div class="geo-layer">
+      <div class="geo-texture"></div>
+      <div class="geo-diamond gd-filled" style="width:320px;height:320px;top:-100px;right:-100px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:180px;height:180px;top:-20px;right:20px;"></div>
+      <div class="geo-diamond gd-bright" style="width:70px;height:70px;top:80px;right:120px;"></div>
+      <div class="geo-diamond gd-filled" style="width:240px;height:240px;bottom:-80px;left:-80px;"></div>
+      <div class="geo-diamond gd-bright" style="width:90px;height:90px;bottom:40px;left:50px;"></div>
+      <div class="geo-beam" style="width:45%;left:0;top:50%;transform:rotate(-6deg);opacity:0.35;"></div>
+    </div>
     <div class="contact-header">
       <span class="section-label" data-i18n="contact.label">Get in Touch</span>
       <h2 data-i18n="contact.headline">Let's Plan Your Event</h2>
@@ -1473,7 +1595,13 @@
   <!-- =============================================
        FOOTER
        ============================================= -->
-  <footer class="footer">
+  <footer class="footer geo-parent">
+    <div class="geo-layer">
+      <div class="geo-diamond gd-filled" style="width:200px;height:200px;bottom:-70px;right:-60px;"></div>
+      <div class="geo-diamond gd-bright" style="width:80px;height:80px;bottom:30px;right:50px;"></div>
+      <div class="geo-diamond gd-filled" style="width:160px;height:160px;top:-50px;left:-50px;"></div>
+      <div class="geo-diamond gd-mid"    style="width:70px;height:70px;top:20px;left:40px;"></div>
+    </div>
     <img src="logo.jpg"
          alt="Secretos Del Sur — El Manjar de los Vivos — Catering Amarillo TX"
          class="logo-img-footer">
