@@ -48,115 +48,6 @@
     }
 
     /* =============================================
-       GOLD GEOMETRIC DESIGN SYSTEM — Image 2 Style
-       Dark radial gradient bg + thick glowing beams
-       ============================================= */
-
-    /* Hero gets the full Image 2 treatment */
-    .hero {
-      background:
-        radial-gradient(ellipse at 20% 50%, #1e1a10 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 50%, #12100a 0%, transparent 60%),
-        radial-gradient(ellipse at 50% 0%,  #2a2010 0%, transparent 50%),
-        linear-gradient(135deg, #111008 0%, #0A0A0A 40%, #0d0d0d 100%);
-    }
-
-    /* SVG beam canvas — sits behind hero content */
-    .hero-beams {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    /* Dark section gradient variation — subtle depth */
-    #about, #services, #menu, #gallery, #contact {
-      background: linear-gradient(160deg, #0e0e0e 0%, #0A0A0A 50%, #0c0c08 100%);
-    }
-    #testimonials {
-      background: linear-gradient(160deg, #3e3e3e 0%, #3A3A3A 60%, #2e2e2e 100%);
-    }
-
-    /* geo-section: relative + hidden overflow so diamonds stay inside */
-    .geo-section {
-      position: relative;
-      overflow: hidden;
-    }
-    /* All direct children sit above decorative layer EXCEPT geo-inner */
-    .geo-section > *:not(.geo-inner) { position: relative; z-index: 2; }
-    /* geo-inner divs are purely decorative — forced absolute, behind everything */
-    .geo-inner {
-      position: absolute !important;
-      z-index: 0 !important;
-      pointer-events: none !important;
-      border-radius: 0;
-      transform: rotate(45deg);
-    }
-
-    /* Diamond panel pseudo-elements — absolutely positioned, no layout impact */
-    .geo-section::before,
-    .geo-section::after {
-      content: '';
-      position: absolute;
-      border-radius: 0;
-      transform: rotate(45deg);
-      pointer-events: none;
-      z-index: 1;
-    }
-    /* Top-right corner diamond */
-    .geo-section::before {
-      width: 340px; height: 340px;
-      top: -140px; right: -140px;
-      border: 1.5px solid rgba(201,168,76,0.22);
-      background: rgba(201,168,76,0.03);
-      box-shadow: inset 0 0 40px rgba(201,168,76,0.06), 0 0 30px rgba(201,168,76,0.04);
-    }
-    /* Bottom-left corner diamond */
-    .geo-section::after {
-      width: 260px; height: 260px;
-      bottom: -110px; left: -110px;
-      border: 1px solid rgba(201,168,76,0.16);
-      background: rgba(201,168,76,0.025);
-    }
-    /* Amber section — dark diamonds */
-    #whyus.geo-section::before {
-      border-color: rgba(10,10,10,0.25); background: rgba(10,10,10,0.08); box-shadow: none;
-    }
-    #whyus.geo-section::after {
-      border-color: rgba(10,10,10,0.18); background: rgba(10,10,10,0.05); box-shadow: none;
-    }
-    /* Hero has SVG beams — no pseudo diamonds needed */
-    .hero.geo-section::before,
-    .hero.geo-section::after { display: none; }
-
-    /* Inner nested diamond sizes and positions */
-    .geo-inner.gi-tr {
-      width: 200px; height: 200px;
-      top: -70px; right: -70px;
-      border: 1px solid rgba(201,168,76,0.28);
-    }
-    .geo-inner.gi-bl {
-      width: 120px; height: 120px;
-      bottom: -40px; left: -40px;
-      border: 1px solid rgba(201,168,76,0.18);
-    }
-    .geo-inner.gi-accent {
-      width: 70px; height: 70px;
-      border: 1.5px solid rgba(201,168,76,0.48);
-      background: rgba(201,168,76,0.045);
-      box-shadow: 0 0 14px rgba(201,168,76,0.16), inset 0 0 10px rgba(201,168,76,0.07);
-    }
-    #whyus .geo-inner {
-      border-color: rgba(10,10,10,0.22) !important;
-      background: rgba(10,10,10,0.05) !important;
-      box-shadow: none !important;
-    }
-
-
-    /* =============================================
        RESET & BASE
        ============================================= */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -529,21 +420,35 @@
       position: relative;
     }
 
-    .hero::before { display: none; }
+    
 
-    /* Hero beams — absolutely positioned, takes NO layout space */
-    .hero-beams {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      pointer-events: none !important;
-      z-index: 1 !important;
-      display: block !important;
+
+
+
+    /* Subtle depth on dark sections */
+    #about    { background: linear-gradient(160deg, #0f0f0f 0%, #0A0A0A 60%, #0c0c08 100%); }
+    #services { background: linear-gradient(200deg, #0A0A0A 0%, #0e0e0a 100%); }
+    #menu     { background: linear-gradient(160deg, #0c0c0a 0%, #0A0A0A 100%); }
+    #gallery  { background: linear-gradient(180deg, #0A0A0A 0%, #0d0d0b 100%); }
+    #contact  { background: linear-gradient(160deg, #0f0f0f 0%, #0A0A0A 100%); }
+    #testimonials { background: linear-gradient(160deg, #3e3e3c 0%, #3A3A3A 60%, #2e2e2c 100%); }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.45);
+      z-index: 1;
     }
-
-    /* All hero content sits above beams */
-    .hero > *:not(.hero-beams) { position: relative; z-index: 3; }
+    .hero > * { position: relative; z-index: 2; }
+    .hero-beams {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
 
     .hero-tagline { margin-top: 20px; }
 
@@ -1277,7 +1182,7 @@
   <!-- =============================================
        HERO
        ============================================= -->
-  <section class="hero geo-section" id="home">
+  <section class="hero" id="home">
 
     <!-- SVG GOLD BEAMS — Image 2 style: thick glowing diagonal lines -->
     <svg class="hero-beams" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice"
@@ -1393,10 +1298,7 @@
   <!-- =============================================
        ABOUT
        ============================================= -->
-  <section id="about" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="about">
 <div class="geo-diamond gd-filled" style="width:380px;height:380px;top:-120px;right:-120px;"></div>
       <div class="geo-diamond gd-mid"    style="width:220px;height:220px;top:-30px;right:-10px;"></div>
       <div class="geo-diamond gd-bright" style="width:90px;height:90px;top:80px;right:110px;"></div>
@@ -1431,10 +1333,7 @@
   <!-- =============================================
        SERVICES
        ============================================= -->
-  <section id="services" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="services">
 <div class="geo-diamond gd-filled" style="width:300px;height:300px;top:-100px;left:-100px;"></div>
       <div class="geo-diamond gd-bright" style="width:130px;height:130px;top:20px;left:40px;"></div>
       <div class="geo-diamond gd-mid"    style="width:70px;height:70px;top:110px;left:160px;"></div>
@@ -1476,10 +1375,7 @@
   <!-- =============================================
        MENU
        ============================================= -->
-  <section id="menu" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="menu">
 <div class="geo-diamond gd-filled" style="width:280px;height:280px;top:-90px;right:-90px;"></div>
       <div class="geo-diamond gd-mid"    style="width:150px;height:150px;top:-10px;right:20px;"></div>
       <div class="geo-diamond gd-filled" style="width:260px;height:260px;bottom:-80px;left:-80px;"></div>
@@ -1548,10 +1444,7 @@
   <!-- =============================================
        WHY US — AMBER SECTION
        ============================================= -->
-  <section id="whyus" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="whyus">
 <div class="geo-diamond gd-dark-bright" style="width:180px;height:180px;top:-20px;right:20px;"></div>
       <div class="geo-diamond gd-dark"        style="width:80px;height:80px;top:80px;right:140px;"></div>
       <div class="geo-diamond gd-dark"        style="width:280px;height:280px;bottom:-100px;left:-80px;"></div>
@@ -1586,10 +1479,7 @@
   <!-- =============================================
        GALLERY
        ============================================= -->
-  <section id="gallery" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="gallery">
 <div class="geo-diamond gd-filled" style="width:220px;height:220px;top:-70px;left:-70px;"></div>
       <div class="geo-diamond gd-bright" style="width:80px;height:80px;top:20px;left:60px;"></div>
       <div class="geo-diamond gd-filled" style="width:200px;height:200px;bottom:-60px;right:-60px;"></div>
@@ -1614,10 +1504,7 @@
   <!-- =============================================
        TESTIMONIALS
        ============================================= -->
-  <section id="testimonials" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="testimonials">
 <div class="geo-diamond gd-filled" style="width:260px;height:260px;top:-80px;right:-80px;"></div>
       <div class="geo-diamond gd-bright" style="width:100px;height:100px;top:30px;right:60px;"></div>
       <div class="geo-diamond gd-mid"    style="width:180px;height:180px;bottom:-60px;left:-50px;"></div>
@@ -1636,10 +1523,7 @@
   <!-- =============================================
        CONTACT
        ============================================= -->
-  <section id="contact" class="geo-section">
-    <div class="geo-inner gi-tr"></div>
-    <div class="geo-inner gi-bl"></div>
-    <div class="geo-inner gi-accent" style="top:55px;right:55px;"></div>
+  <section id="contact">
 <div class="geo-diamond gd-filled" style="width:320px;height:320px;top:-100px;right:-100px;"></div>
       <div class="geo-diamond gd-mid"    style="width:180px;height:180px;top:-20px;right:20px;"></div>
       <div class="geo-diamond gd-bright" style="width:70px;height:70px;top:80px;right:120px;"></div>
@@ -1754,7 +1638,7 @@
   <!-- =============================================
        FOOTER
        ============================================= -->
-  <footer class="footer geo-section">
+  <footer class="footer">
 <div class="geo-diamond gd-bright" style="width:80px;height:80px;bottom:30px;right:50px;"></div>
       <div class="geo-diamond gd-filled" style="width:160px;height:160px;top:-50px;left:-50px;"></div>
       <div class="geo-diamond gd-mid"    style="width:70px;height:70px;top:20px;left:40px;"></div>
